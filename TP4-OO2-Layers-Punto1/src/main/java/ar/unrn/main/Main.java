@@ -14,6 +14,7 @@ public class Main {
 				try {
 					AgregarParticipanteFrame frame = new AgregarParticipanteFrame(new EnBaseAlmacenamiento(
 							new DataBaseConexion("jdbc:mysql://127.0.0.1/registro_tp4_oo2", "root", "")));
+
 					frame.setVisible(true);
 					frame.setLocationRelativeTo(null);
 					;
