@@ -1,4 +1,4 @@
-package ar.unrn.domain.portsin;
+package ar.unrn.domain.portsout;
 
 public class DomainException extends Exception {
 

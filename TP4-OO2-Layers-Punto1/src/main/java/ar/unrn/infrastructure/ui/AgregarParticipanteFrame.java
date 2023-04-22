@@ -4,7 +4,6 @@ import java.awt.ComponentOrientation;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,17 +13,17 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import ar.unrn.domain.model.AlmacenamientoExceptions;
-import ar.unrn.domain.portsin.Almacenamiento;
+import ar.unrn.domain.portsin.RegistroParticipante;
+import ar.unrn.domain.portsout.DomainException;
 
 public class AgregarParticipanteFrame extends JFrame {
-	private Almacenamiento almacenamiento;
+	private RegistroParticipante registroParticipante;
 	private JTextField nombre;
 	private JTextField telefono;
 	private JTextField region;
 
-	public AgregarParticipanteFrame(Almacenamiento almacenamiento) throws SQLException {
-		this.almacenamiento = almacenamiento;
+	public AgregarParticipanteFrame(RegistroParticipante defaultRegistroParticipante) {
+		this.registroParticipante = defaultRegistroParticipante;
 		setupUIComponents();
 	}
 
@@ -34,19 +33,6 @@ public class AgregarParticipanteFrame extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.nombre = new JTextField(10);
 		this.telefono = new JTextField(10);
-//		this.telefono.addKeyListener(new KeyAdapter() {
-//			@Override
-//			public void keyTyped(KeyEvent e) {
-//				int key = e.getKeyChar();
-//				boolean numeros = key >= 48 && key <= 57;
-//
-//				if (!numeros) // para que solo ingrese numeros
-//				{
-//					e.consume();
-//				}
-//			}
-//		});
-
 		this.region = new JTextField(10);
 		this.nombre.setText("");
 		this.telefono.setText("");
@@ -64,8 +50,9 @@ public class AgregarParticipanteFrame extends JFrame {
 		botonCargar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					almacenamiento.sumarParticipante(nombre.getText(), telefono.getText(), region.getText());
-				} catch (AlmacenamientoExceptions e1) {
+					registroParticipante.sumarParticipante(nombre.getText(), telefono.getText(), region.getText());
+					JOptionPane.showMessageDialog(null, "Participante Cargado Exitosamente");
+				} catch (DomainException e1) {
 					JOptionPane.showMessageDialog(null, e1.getMessage());
 				}
 			}
