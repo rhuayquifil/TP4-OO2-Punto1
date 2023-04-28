@@ -13,8 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import ar.unrn.domain.portsin.DomainException;
 import ar.unrn.domain.portsin.RegistroParticipante;
-import ar.unrn.domain.portsout.DomainException;
 
 public class AgregarParticipanteFrame extends JFrame {
 	private RegistroParticipante registroParticipante;

@@ -1,15 +1,16 @@
 package ar.unrn.domain.model;
 
+import ar.unrn.domain.portsin.DomainException;
 import ar.unrn.domain.portsin.RegistroParticipante;
-import ar.unrn.domain.portsout.AlmacenamientoDatos;
-import ar.unrn.domain.portsout.DomainException;
+import ar.unrn.domain.portsout.GuardarDatos;
+import ar.unrn.domain.portsout.InfrastructureExceptions;
 
 public class DefaultRegistroParticipante implements RegistroParticipante {
 
-	private AlmacenamientoDatos enBaseAlmacenamientoDatos;
+	private GuardarDatos guardarDatos;
 
-	public DefaultRegistroParticipante(AlmacenamientoDatos enBaseAlmacenamientoDatos) {
-		this.enBaseAlmacenamientoDatos = enBaseAlmacenamientoDatos;
+	public DefaultRegistroParticipante(GuardarDatos guardarDatos) {
+		this.guardarDatos = guardarDatos;
 	}
 
 	@Override
@@ -27,7 +28,11 @@ public class DefaultRegistroParticipante implements RegistroParticipante {
 			throw new DomainException("Region desconocida. Las conocidas son: China, US, Europa");
 		}
 
-		this.enBaseAlmacenamientoDatos.sumarParticipante(nombre, telefono, region);
+		try {
+			this.guardarDatos.sumarParticipante(nombre, telefono, region);
+		} catch (InfrastructureExceptions e) {
+			throw new DomainException(e.getMessage());
+		}
 	}
 
 	private boolean validarTelefono(String telefono) {
