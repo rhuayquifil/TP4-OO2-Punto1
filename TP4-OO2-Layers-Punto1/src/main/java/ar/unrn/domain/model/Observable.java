@@ -3,6 +3,7 @@ package ar.unrn.domain.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import ar.unrn.domain.portsout.InfrastructureExceptions;
 import ar.unrn.domain.portsout.Observer;
 
 public abstract class Observable {
@@ -18,7 +19,8 @@ public abstract class Observable {
 		this.listaSubscriptores.add(subscriptor);
 	}
 
-	protected void notificar(String nombre, String telefono, String region, String email) {
+	protected void notificar(String nombre, String telefono, String region, String email)
+			throws InfrastructureExceptions {
 		for (Observer subscriptor : listaSubscriptores) {
 			subscriptor.actualizar(nombre, telefono, region, email);
 		}

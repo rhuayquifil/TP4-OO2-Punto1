@@ -49,9 +49,7 @@ public class DefaultRegistroParticipante extends Observable implements RegistroP
 		}
 
 		try {
-			this.guardarDatos.sumarParticipante(nombre, telefono, region);
-
-			// ACA TENES QUE NOTIFICAR EL CAMBIO A LOS SUBS
+			this.guardarDatos.sumarParticipante(nombre, telefono, region, email);
 
 			this.notificar(nombre, telefono, region, email);
 		} catch (InfrastructureExceptions e) {
