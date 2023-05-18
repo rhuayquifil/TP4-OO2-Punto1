@@ -3,6 +3,7 @@ package ar.unrn.infrastructure.data;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.HashMap;
 
 import ar.unrn.domain.portsout.GuardarDatos;
 import ar.unrn.domain.portsout.InfrastructureExceptions;
@@ -17,15 +18,15 @@ public class EnBaseGuardarDatos implements GuardarDatos {
 		this.properties = properties;
 	}
 
-	public void sumarParticipante(String nombre, String telefono, String region, String email)
-			throws InfrastructureExceptions {
+	public void sumarParticipante(HashMap<String, String> listaDatos) throws InfrastructureExceptions {
 
 		try (Connection conn = DriverManager.getConnection(properties.get("url"), properties.get("usuario"),
 				properties.get("contrasena"));
 				java.sql.PreparedStatement state = conn.prepareStatement(
 						"INSERT INTO participante (nombre, telefono, region, email)" + "VALUES (?, ?, ?, ?);")) {
 
-			guardarRegistro(nombre, telefono, region, email, state);
+			guardarRegistro(listaDatos.get("nombre"), listaDatos.get("telefono"), listaDatos.get("region"),
+					listaDatos.get("email"), state);
 
 		} catch (SQLException | NumberFormatException e) {
 			throw new InfrastructureExceptions("error al prosesar consulta");

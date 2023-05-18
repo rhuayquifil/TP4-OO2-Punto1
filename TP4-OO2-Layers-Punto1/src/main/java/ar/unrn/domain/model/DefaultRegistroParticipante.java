@@ -1,5 +1,6 @@
 package ar.unrn.domain.model;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
@@ -49,9 +50,16 @@ public class DefaultRegistroParticipante extends Observable implements RegistroP
 		}
 
 		try {
-			this.guardarDatos.sumarParticipante(nombre, telefono, region, email);
 
-			this.notificar(nombre, telefono, region, email);
+			HashMap<String, String> listaDatos = new HashMap<String, String>();
+			listaDatos.put("nombre", nombre);
+			listaDatos.put("telefono", telefono);
+			listaDatos.put("region", region);
+			listaDatos.put("email", email);
+
+			this.guardarDatos.sumarParticipante(listaDatos);
+
+			this.notificar(listaDatos);
 		} catch (InfrastructureExceptions e) {
 			throw new DomainException(e.getMessage());
 		}

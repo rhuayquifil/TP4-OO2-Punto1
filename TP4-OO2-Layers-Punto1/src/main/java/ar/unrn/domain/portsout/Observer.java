@@ -1,7 +1,8 @@
 package ar.unrn.domain.portsout;
 
+import java.util.HashMap;
+
 public interface Observer {
 
-	void actualizar(String nombre, String telefono, String region, String emailDestinatario)
-			throws InfrastructureExceptions;
+	void actualizar(HashMap<String, String> listaDatos) throws InfrastructureExceptions;
 }

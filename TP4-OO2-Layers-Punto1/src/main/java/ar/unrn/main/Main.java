@@ -22,8 +22,10 @@ public class Main {
 				try {
 
 					List<Observer> subscriptores = new ArrayList<>();
+
 					subscriptores.add(new NuevaSubscripcionObserver(
 							new EmailNotificacion("22655f44218bb3", "efb11829ac8703", "sandbox.smtp.mailtrap.io")));
+
 					AgregarParticipanteFrame frame = new AgregarParticipanteFrame(new DefaultRegistroParticipante(
 							new EnBaseGuardarDatos(
 									new BaseDeDatosPropiedades("jdbc:mysql://127.0.0.1/base_tp4_punto1", "root", "")),

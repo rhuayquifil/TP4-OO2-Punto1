@@ -1,7 +1,9 @@
 package ar.unrn.domain.portsout;
 
+import java.util.HashMap;
+
 public interface GuardarDatos {
 
-	void sumarParticipante(String nombre, String telefono, String region, String email) throws InfrastructureExceptions;
+	void sumarParticipante(HashMap<String, String> listaDatos) throws InfrastructureExceptions;
 
 }
